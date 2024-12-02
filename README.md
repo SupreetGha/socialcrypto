@@ -5,8 +5,9 @@
 - [Project Overview](#project-overview)
 - [Data Sources](#data=sources)
 - [Tools](#tools)
-- Data Cleaning
-- [Exploratory Data Analysis]
+- [Data Cleaning](#data-cleaning)
+- [Exploratory Data Analysis](#exploratoy-analysis)
+- [Data Analysis](#data-analysis)
 - [Findings](#findings) 
 - [Recommendations](#recommendations)
 - [Limitations](#limitations)
@@ -84,32 +85,6 @@ Highlighted spikes in price corresponding to key tweets.
 
 Ran and PLotted Monte Carlo Simulation
 
-```python
-# Filter the data before April 2nd, 2019
-start_date = pd.to_datetime('2019-04-02')
-filtered_prices = dogecoin_prices[dogecoin_prices['Date'] < start_date]
-# Select the 'Close' prices
-prices = filtered_prices['Close'].values
-# Calculate the daily returns
-returns = np.diff(prices) / prices[:-1]
-# Calculate the mean and standard deviation of daily returns
-mean_return = np.mean(returns)
-std_return = np.std(returns)
-# Set the simulation parameters
-num_simulations = 5000
-num_days = 1251
-# Perform the Monte Carlo simulation
-simulations = np.zeros((num_days, num_simulations))
-simulations[0, :] = prices[-1]
-for i in range(1, num_days):
-drift = 1 + mean_return
-shock = std_return * np.random.normal()
-simulations[i, :] = simulations[i-1, :] * (drift + shock)
-
-
-```
-
-
 #### Monte Carlo Simulation
 
 ```python
@@ -145,6 +120,7 @@ plt.ylabel("Price")
 plt.show()
 
 ```
+![Screenshot 2024-12-01 190826](https://github.com/user-attachments/assets/8c29dd52-d850-42b8-a4fc-8e730679fb04)
 
 
 #### Tweets along a line graph
@@ -176,6 +152,7 @@ plt.xticks(rotation=45)
 plt.show()
 
 ```
+![Screenshot 2024-12-01 190914](https://github.com/user-attachments/assets/c34d966f-2674-4147-8622-de06313b0511)
 
 
 ### Findings
